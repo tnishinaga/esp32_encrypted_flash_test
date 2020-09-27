@@ -45,6 +45,9 @@ void app_main(void)
             break;
         case ESP_ERR_NVS_CORRUPT_KEY_PART:
             ESP_LOGE(TAG, "nvs_key is found to be corrupt");
+            ESP_LOGE(TAG, "Regenerate nvs_key");
+            // 鍵が不正の場合は鍵を作り直す
+            ret = nvs_flash_generate_keys(nvs_key_part, &nvs_cfg);
             break;
         default:
             // error
